@@ -1,0 +1,29 @@
+{
+  "name": "anytheme",
+  "version": "1.0.0",
+  "homepage": "https://github.com/cybernetlab/anytheme",
+  "authors": [
+    "Alexey Ovchinnikov <alexiss@cybernetlab.ru>"
+  ],
+  "main": "js/anytheme.js",
+  "private": true,
+  "ignore": [
+    "components",
+    "dev",
+    "test",
+    "tests",
+    "**/*.txt"
+  ],
+  "dependencies": {
+    "jquery": "latest",
+    "underscore": "latest",
+    "anyloader": "latest"
+  },
+  "devDependencies": {
+    "requirejs": "latest",
+    "mocha": "latest",
+    "expect": "latest",
+    "mustache": "latest",
+    "handlebars": "latest"
+  }
+}

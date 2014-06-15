@@ -1,0 +1,12 @@
+{
+  "name": "bootstrap",
+  "icons": {
+    "fa": {},
+    "glyphicon": {
+      "users": "user"
+    }
+  },
+  "templates": {
+    "button": "<div class=\"btn\"><% if(icon) print(themeIcon(icon) + ' ') %></div>"
+  }
+}
