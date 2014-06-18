@@ -17,7 +17,7 @@ function($, _, LoaderFactory) {
     Icons.sets = {};
 
     Icons.load = LoaderFactory({
-      parse: function(str) {
+      'parse:html': function(str) {
         return $(str).filter('[data-type="icons"][data-name]');
       },
       create: function(obj) {

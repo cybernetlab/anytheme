@@ -17,18 +17,9 @@ function($, _, LoaderFactory, IconsFactory, TemplateFactory) {
     };
 
     var loadTheme = LoaderFactory({
-      create: function(obj) {
-        var deferred = $.Deferred();
-        var theme = new AnyTheme();
-        $.when(
-          AnyTheme.Icons.load(obj.icons),
-          AnyTheme.Template.load(obj.templates).done(function(templates) { theme.templates = templates }),
-          AnyTheme.Template.loadPartials(obj.partials)
-        ).done(function() {
-          deferred.resolve(theme);
-        });
-        return deferred;
-      }
+      'create:icons': AnyTheme.Icons.load,
+      'create:templates': AnyTheme.Template.load,
+      'create:partials': AnyTheme.Template.loadPartials
     });
 
     opts = _.extend({}, {

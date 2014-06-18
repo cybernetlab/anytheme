@@ -4,13 +4,13 @@ require.config({
   paths: {
     spec: '../test/spec',
     helpers: '../test/helpers',
-    anyloader: '../components/anyloader/anyloader',
-    jquery: '../components/jquery/dist/jquery',
-    underscore: '../components/underscore/underscore',
-    mustache: '../components/mustache/mustache',
-    handlebars: '../components/handlebars/handlebars.amd',
-    mocha: '../components/mocha/mocha',
-    expect: '../components/expect/index'
+    anyloader: '../bower/anyloader/anyloader',
+    jquery: '../bower/jquery/dist/jquery',
+    underscore: '../bower/underscore/underscore',
+    mustache: '../bower/mustache/mustache',
+    handlebars: '../bower/handlebars/handlebars.amd',
+    mocha: '../bower/mocha/mocha',
+    expect: '../bower/expect/index'
   },
   urlArgs: 'bust=' + (new Date()).getTime()
 });
