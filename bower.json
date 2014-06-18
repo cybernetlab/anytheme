@@ -7,13 +7,7 @@
   ],
   "main": "js/anytheme.js",
   "private": true,
-  "ignore": [
-    "components",
-    "dev",
-    "test",
-    "tests",
-    "**/*.txt"
-  ],
+  "ignore": [ "bower", "test", "**/*.txt" ],
   "dependencies": {
     "jquery": "latest",
     "underscore": "latest",

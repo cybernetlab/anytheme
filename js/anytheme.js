@@ -16,18 +16,27 @@ function($, _, LoaderFactory, IconsFactory, TemplateFactory) {
       this.icons = new AnyTheme.Icons(set);
     };
 
-    var loadTheme = LoaderFactory({
-      'create:icons': AnyTheme.Icons.load,
-      'create:templates': AnyTheme.Template.load,
-      'create:partials': AnyTheme.Template.loadPartials
-    });
-
     opts = _.extend({}, {
       templateEngine: _.template
     }, opts);
     if (!_.has(opts, 'url')) opts.url = opts.from;
+
     AnyTheme.Template = TemplateFactory(opts.templateEngine);
     AnyTheme.Icons = IconsFactory();
-    return loadTheme(opts.url);
+
+    var loadTheme = LoaderFactory({
+      'compose:object[icons]': AnyTheme.Icons.load,
+      'compose:object[templates]': AnyTheme.Template.load,
+      'compose:object[partials]': AnyTheme.Template.loadPartials,
+      'compose:object': function(obj) {
+        // console.log(obj);
+        var theme = new AnyTheme();
+        var defaults = loadTheme.defaults['compose:object'](obj);
+        theme.templates = defaults.templates;
+        return theme;
+      }
+    });
+
+    return loadTheme('url(' + opts.url + ')');
   }
 });

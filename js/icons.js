@@ -20,16 +20,11 @@ function($, _, LoaderFactory) {
       'parse:html': function(str) {
         return $(str).filter('[data-type="icons"][data-name]');
       },
-      create: function(obj) {
-        var deferred = $.Deferred();
-        var icons = {};
-        $.when.apply(this, _.map(obj, function(v, k) {
-          return loadIconSet(v).done(function (set) { icons[k] = set; });
-        })).done(function() {
-          _.extend(Icons.sets, icons);
-          deferred.resolve(icons);
-        });
-        return deferred;
+
+      'compose:object[]': function(key, value) {
+        var deferred = loadIconSet(value);
+        deferred.done(function(icons) { Icons.sets[key] = icons; });
+        return [key, deferred];
       }
     });
 

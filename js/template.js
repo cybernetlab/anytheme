@@ -11,6 +11,7 @@ function($, _, LoaderFactory) {
     };
 
     var createTemplate = function(obj) {
+      console.log(obj);
       var result = {};
       _.each(obj, function(v, k) {
         if (_.isString(v)) {
@@ -26,18 +27,18 @@ function($, _, LoaderFactory) {
     Template.helpers = {};
 
     Template.load = LoaderFactory({
-      parse: function(str) {
+      'parse:html': function(str) {
         return $(str).filter('[data-type="template"][data-name]');
       },
-      create: createTemplate
+      'compose:object': createTemplate
     });
 
     Template.loadPartials = LoaderFactory({
-      parse: function(str) {
+      'parse:html': function(str) {
         return $(str).filter('[data-type="partial"][data-name]');
       },
-      create: function(obj) {
-        var template = createTemplate(obj)
+      'compose:object': function(obj) {
+        var templates = createTemplate(obj)
         if (!_.isEmpty(templates)) _.extend(Template.partials, templates);
         return templates;
       }
@@ -79,11 +80,6 @@ function($, _, LoaderFactory) {
         }
         data = _.extend({}, Template.helpers, data);
         return this.engine(this.template, data);
-      };
-
-      Template.defaults = {
-        icon: new Template('<i class="<%-iconClass(icon)"></i>'),
-        button: new Template('<div class="btn<%if(type) print(" "+type%>"><%partial("icon",{icon:icon})%><%=content%></div>')
       };
 
     } else if (_.isObject(engine)) {
@@ -142,11 +138,6 @@ function($, _, LoaderFactory) {
       } else {
         throw new Error('Unsupported template engine');
       }
-
-      Template.defaults = {
-        icon: new Template('<i class="{{#iconClass}}{{icon}}{{/iconClass}}"></i>'),
-        button: new Template('<div class="btn{{#type}} {{.}}{{/type}}">{{>icon}}{{content}}</div>')
-      };
     } else {
       throw new Error('Wrong template engine');
     }
